@@ -14,6 +14,7 @@ function list(state=[], action){
             let acualList = state.filter(a=>{
             return a.id!==action.taskId;
             });
+            console.log(acualList   )
             return acualList;
         case EDIT_TASK_SUCCESS:
             console.log(action.etask)

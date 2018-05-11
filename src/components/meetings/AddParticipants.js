@@ -24,7 +24,10 @@ onDemo = (data) =>{
   this.props.addEmployes(data);
   this.setState({searchText:""})
 
-
+}
+close=()=>{
+    this.props.openParticipant();
+    this.setState({searchText:""})
 }
 
   render() {
@@ -71,7 +74,7 @@ onDemo = (data) =>{
             <FlatButton
               label="Cancelar"
               primary={true}
-              onClick={this.props.openParticipant}
+              onClick={this.close}
             />
             <FlatButton
               label="Agregar"

@@ -17,7 +17,7 @@ const style = {
     margin: '3px auto',
   },
   Paper:{
-    maxHeight:'290px',
+    maxHeight:'400px',
   },
   menu:{
     width:' 100%',
@@ -45,7 +45,7 @@ const MeetingsListUser = ({isStaff,employees,openListAdd,meeting}) => (
                     onClick={openListAdd}
                     />:null)]
                     :
-                    <List style={{overflow:'auto', maxHeight:'260px'}}>
+                    <List style={{overflow:'auto', maxHeight:'320px'}}>
                   {meeting.participants.map(data => <ListItem key={data.id} style={{textAlign:'start'}}
                    primaryText={data.user.username}
                    leftAvatar={<Avatar src={data.avatar} />}

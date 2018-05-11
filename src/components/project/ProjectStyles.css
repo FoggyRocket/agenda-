@@ -4,7 +4,7 @@
 
 .form, .detail, .title {
     display: flex;
-    flex-wrap: wrap;
+
 }
 
 .form, .title {
@@ -20,7 +20,8 @@
 
 .detail {
     flex-direction: column;
-    padding: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 #external-events {

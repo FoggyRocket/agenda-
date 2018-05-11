@@ -1,12 +1,16 @@
 import React, {Component, Fragment} from 'react';
 import {ProjectTable} from './ProjectsTable';
-import {connect} from 'react-redux';
-import {newProject} from '../../redux/actions/projectActions';
 import {FloatingActionButton} from 'material-ui';
 import IconFAB from 'material-ui/svg-icons/content/add';
 import {Switch,Route} from 'react-router-dom';
 import NewProject from './AddNewProjectPage';
 import './ProjectStyles.css';
+import {connect} from 'react-redux';
+import * as profileActions from "../../redux/actions/profileActions";
+import * as userActions from "../../redux/actions/userActions";
+import {bindActionCreators} from "redux";
+import * as projectActions from "../../redux/actions/projectActions";
+import Loader from '../common/Loading'
 
 
 class ProjectContainer extends Component {
@@ -25,7 +29,8 @@ class ProjectContainer extends Component {
     };
 
     render() {
-        const {projects, areFetched} = this.props;
+        const {projects, fetched} = this.props;
+        if(!fetched)return<Loader/>
         const NewProjectModal = (props) => (
             <NewProject
                 onSubmit={this.onSubmit}
@@ -37,8 +42,6 @@ class ProjectContainer extends Component {
         return (
             <Fragment>
                 {
-                    !areFetched ?
-                        <h1>Loading</h1> :
                         <Fragment>
                             <ProjectTable
                                 projects={projects}
@@ -66,10 +69,35 @@ const fabStyle = {
     right: 15
 };
 
-const mapStateToProps = (state,ownProps) => ({
-    projects: state.projects.list,
-    areFetched: state.projects.areFetched
-});
 
-ProjectContainer = connect(mapStateToProps, {newProject})(ProjectContainer);
+    function mapStateToProps(state, ownProps) {
+        let user =state.user.object;
+        let profile = state.profile.object;
+        let projects = state.projects.list;
+        if(user.is_staff){
+            projects = state.projects.list;
+        }else{
+            projects=state.projects.myProjects;
+        }
+
+
+        console.log(projects)
+        return {
+            user,
+            profile,
+            projects,
+            fetched:  projects!==undefined && state.projects.list !== undefined,
+        }
+
+    }
+
+    function mapDispatchToProps(dispatch){
+        return{
+            projectActions:bindActionCreators(projectActions,dispatch),
+            userActions:bindActionCreators(userActions,dispatch),
+            profileActions:bindActionCreators(profileActions,dispatch)
+        }
+    }
+
+    ProjectContainer = connect (mapStateToProps,mapDispatchToProps)(ProjectContainer);
 export default ProjectContainer;

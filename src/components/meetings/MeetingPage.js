@@ -39,8 +39,7 @@ class MeetingsPage extends Component{
   }
 
   componentWillReceiveProps(){
-    //falta filtrar los que ya son parte
-    // this.filterUserslistDisplay()
+
     this.usersList()
   }
 
@@ -150,6 +149,7 @@ class MeetingsPage extends Component{
       let newTask= Object.assign({},this.state.task);
       newTask['meeting_id']=parseInt(this.props.match.params.id)
       newTask['user_id']=null;
+      newTask['project_id']=null;
       this.props.tasksActions.saveTask(newTask);
       console.log(newTask)
       e.target.name.value="";
@@ -279,7 +279,15 @@ class MeetingsPage extends Component{
 
           let {userAll,employees, meeting,fetched,tasks,user,files,order,id,notes,immediate} = this.props;
           let usersList = this.state.usersList;
+
           if(!fetched)return<Loader/>
+          console.log(meeting)
+            if(!user.is_staff && !user.is_superuser){
+              order=meeting.order
+              tasks=meeting.tasks
+              notes=meeting.notes
+              immediate=meeting.action
+            }
         return(
                 <div>
                   <AddParticipants
@@ -355,7 +363,13 @@ function mapStateToProps(state, ownProps) {
         return id == a.id;
     });
      tasks = state.tasks.list.filter(b=>{
-      return id == b.meeting.id;
+
+      if ( !isNaN(b.meeting)) {
+        return false;
+
+      } else {
+        return id == b.meeting.id;
+      }
     })
   }else{
     meeting=state.meeting.myMeetings.find(a=>{

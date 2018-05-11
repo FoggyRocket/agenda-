@@ -13,7 +13,7 @@ import immediateReducer from './immediateReducer';
 
 
 
-import projects from './projectReducer';
+import projectReducer from './projectReducer';
 import fastNoteReducer from "./fastNoteReducer";
 
 const rootReducer = combineReducers({
@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
     order:orderReducer,
     notes:notesReducer,
     immediate:immediateReducer,
-    projects,
+    projects:projectReducer,
     fastnote:fastNoteReducer
 
 });

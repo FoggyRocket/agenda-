@@ -96,9 +96,9 @@ import DeleteFastNote from './DeleteFastNote'
             modal={false}
             open={this.props.open}
             contentStyle={modStyle}
-            bodyStyle={{backgroundColor:'#FFFFA5'}}
-            titleStyle={{backgroundColor:'#FFFFA5'}}
-            actionsContainerStyle={{backgroundColor:'#FFFFA5'}}
+            bodyStyle={{backgroundColor:'#f2f6fa'}}
+            titleStyle={{backgroundColor:'#f2f6fa'}}
+            actionsContainerStyle={{backgroundColor:'#f2f6fa'}}
             actions={edit ?actions:activeEdit}
             onRequestClose={this.props.close}
           >

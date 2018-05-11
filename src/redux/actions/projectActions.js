@@ -21,13 +21,29 @@ export const getProjects = () => (dispatch, getState) => {
         .then(r => {
             dispatch(getProjectsSuccess(r));
             // Determine if projects have fetched from server
-            dispatch(projectsFethedSuccess(true));
-            Promise.resolve(r);
+            //dispatch(projectsFethedSuccess(true));
+            //Promise.resolve(r);
         }).catch(e => {
             Promise.reject(e);
         });
 };
+// READ MYPROJECTS
+export const READMY = "GET_MY_PROJECTS"
 
+export const getMyProjectsSuccess = myProjects =>({
+   type: READMY,
+   myProjects
+});
+
+export const getMyProjects = () => (dispatch, getState)=>{
+  return ProjectApi.getMyProjects()
+      .then(r=>{
+          console.log("Que hay aqui", r)
+          dispatch(getMyProjectsSuccess(r));
+      }).catch(e =>{
+         Promise.reject(e);
+      });
+};
 // CREATE
 export const CREATE = "POST_PROJECT";
 
@@ -81,5 +97,3 @@ export const deleteProject = idProject => (dispatch, getState) => {
             Promise.reject(e)
         });
 };
-
-

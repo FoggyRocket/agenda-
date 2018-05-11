@@ -13,7 +13,7 @@ function getUserToken() {
 const projectRepository = () => {
     const debug = true;
     const baseURL = 'http://localhost:8000/project/';
-
+    let urlMyProject = 'http://localhost:8000/users/myprojects/';
     if (!debug){
 
     }
@@ -57,8 +57,31 @@ const projectRepository = () => {
                 console.log(e.response);
                 reject(e.response);
             });
-        })
+        });
     };
+
+    const getMyProjects = ()=>{
+        return new Promise((resolve, reject)=>{
+
+            const instance = axios.create({
+                baseURL: urlMyProject,
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization" : "Token " + getUserToken()
+                }
+            });
+
+            instance.get("")
+                .then(r => {
+                    console.log(r.data);
+                    resolve(r.data);
+                }).catch(e => {
+                console.log(e.response);
+                reject(e.response);
+            });
+        });
+    };
+
 
     const updateProject = project => {
         return new Promise( (resolve, reject) => {
@@ -102,7 +125,7 @@ const projectRepository = () => {
         })
     };
 
-    return {newProject,getProjects,updateProject,deleteProject}
+    return {newProject,getProjects,updateProject,deleteProject,getMyProjects}
 };
 
 export default projectRepository();

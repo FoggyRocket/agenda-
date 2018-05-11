@@ -36,6 +36,7 @@ export const saveTask=(task)=>(dispatch,getState)=>{
       console.log(r);
       dispatch(saveTaskSuccess(r))
     }).catch(e=>{
+          throw e
       console.log(e)
     })
 }
@@ -76,6 +77,7 @@ export const editTask=(etask)=>(dispatch, getState)=>{
             dispatch(getTasks())
             console.log(r);
         }).catch(e=>{
+            throw e
         console.log(e)
     })
 };
@@ -93,6 +95,7 @@ export const getMyTasks=(myTask)=>(dispatch, getState)=>{
         dispatch(getMyTasksSuccess(r))
         console.log(r);
     }).catch(e=>{
+
       console.log(e)
     })
 }

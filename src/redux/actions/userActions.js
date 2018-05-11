@@ -8,10 +8,7 @@ import {getFile} from './fileActions';
 import {getOrder} from './orderActions';
 import {getNotes} from './notesActions';
 import {getAction} from './immediateActions';
-
-import {getProjects} from './projectActions';
-
-
+import {getProjects,getMyProjects} from './projectActions';
 import {getFastNote} from './fastNoteActions';
 
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
@@ -87,21 +84,24 @@ export const checkIfUser=()=>(dispatch, getState)=>{
           dispatch(getMyTasks());
           dispatch(getMeeting());
           dispatch(getMyMeetings());
+          dispatch(getAllUser());
+          dispatch(getFile());
+          dispatch(getOrder());
+          dispatch(getNotes());
+          dispatch(getAction());
+          dispatch(getProjects());
+          dispatch(getMyProjects());
+
         }else{
           dispatch(getMyTasks());
           dispatch(getMyMeetings());
+          dispatch(getMyProjects());
+
         }
       });
 
       dispatch(getProfile());
       dispatch(getAllProfiles());
-      dispatch(getAllUser());
-      dispatch(getFile());
-      dispatch(getOrder());
-      dispatch(getNotes());
-      dispatch(getAction());
-
-      dispatch(getProjects());
 
       dispatch(getFastNote());
 

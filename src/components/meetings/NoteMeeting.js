@@ -16,7 +16,7 @@ const NoteMeeting = ({noteMe,open,onDeleteNote,isStaff,openNote}) => (
           style={style.gridList}
         >
             {noteMe.map(data =>
-              <Card key={data.id} style={{backgroundColor:'#FFFFA5'}}>
+              <Card key={data.id} style={{backgroundColor:'#f2f6fa'}}>
               <CardHeader
                 title={data.autor.user.username}
                 avatar={data.autor.avatar}
