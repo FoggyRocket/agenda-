@@ -25,9 +25,9 @@ export default class Gantt extends Component {
                 //any custom logic here
                 var task = gantt.getTask(id);
                 var dateEnd = gantt.calculateEndDate(task)
-                if (this.props.prueba){
+                if (this.props.dragDate){
 
-                    this.props.prueba(task,dateEnd)
+                    this.props.dragDate(task,dateEnd)
                 };
 
 
@@ -36,7 +36,6 @@ export default class Gantt extends Component {
             gantt.config.drag_move = false;
             gantt.config.drag_resize = false;
         }
-
 
 
         gantt.attachEvent('onTaskClick', (id) => {

@@ -18,6 +18,7 @@ import * as userActions from "../../redux/actions/userActions";
 import * as employeesActions from "../../redux/actions/employeesActions";
 import * as projectActions from "../../redux/actions/projectActions";
 import {Toast, ToastDanger} from "react-toastr-basic";
+import EditProject from "./EditProject";
 
 class DetailProjectPage extends Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class DetailProjectPage extends Component {
         this.state = {
             openLightBox:false,
             openAlertP:false,
+            editProject:false,
             id:null,
             taskId:null,
             mytasks:{},
@@ -79,7 +81,10 @@ class DetailProjectPage extends Component {
     }
 ///////////////////////////////////////////////////////////////////77
     goToEdit = () => {
-        this.props.history.push(`/agenda/project/${this.props.id}`)
+        let {editProject}=this.state;
+        editProject = !editProject
+        this.setState({editProject})
+        console.log(editProject)
     };
     openNewTask=()=>{
         let {openLightBox}=this.state;
@@ -160,7 +165,7 @@ class DetailProjectPage extends Component {
         console.log(project)
     }
 //////////////////////////////////
-    prueba =(tarea,Fecha)=>{
+    dragDate =(tarea,Fecha)=>{
         let newTask= Object.assign({},this.state.task);
         let idTask = tarea.id
         let newDateStart = tarea.start_date;
@@ -209,6 +214,7 @@ class DetailProjectPage extends Component {
                 {
 
                         <div className="detail">
+                            <EditProject open={this.state.editProject} close={this.goToEdit} project={project}/>
                             <NewLightBox open={this.state.openLightBox} close={this.openNewTask} id={id} participants={participants}/>
                             <AlertProject  user ={user.is_staff} open={this.state.openAlertP} id={this.state.id} tareas={tasks} close={this.openAlert}/>
                             <AddParticipants
@@ -225,8 +231,10 @@ class DetailProjectPage extends Component {
                                 <ProjectInfo
                                     project={project}
                                     goToEdit={this.goToEdit}
+                                    isStaff={user.is_staff}
                                 />
                                 <AcordionProject
+
                                     project={project}
                                     isStaff={user.is_staff}
                                     employees={employees}
@@ -244,7 +252,7 @@ class DetailProjectPage extends Component {
                                        modalOpen={this.openAlert}
                                        deleteTask={this.state.deleteT}
                                        taskId={this.state.taskId}
-                                       prueba={this.prueba}
+                                       dragDate={this.dragDate}
                                        user={user.is_staff}
                                 />
 
