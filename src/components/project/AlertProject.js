@@ -146,10 +146,18 @@ class AlertProject extends React.Component {
                 primary={true}
                 onClick={this.props.close}
             />,
+
             <FlatButton
                 label="Editar"
                 primary={true}
                 onClick={this.edit}
+            />
+        ];
+        const actionUser =[
+            <FlatButton
+                label="Cerrar"
+                primary={true}
+                onClick={this.props.close}
             />
         ];
         const actionsEdit =[
@@ -206,11 +214,12 @@ class AlertProject extends React.Component {
                         onChange={this.taskHandleChange}
                         fullWidth={true}
                     />
+                {this.props.user ?
                     <IconButton onClick={this.delete}>
                         <Icon/>
                     </IconButton>
-
-
+                    : false
+                }
             </div>
 
         ];
@@ -224,14 +233,16 @@ class AlertProject extends React.Component {
                     titleStyle={{backgroundColor:'blue'}}
                     bodyStyle={{display:'flex', justifyContent:'space-around'}}
                     onRequestClose={this.props.close}
-                    actions={this.state.Edit ? actions: actionsEdit}
+                    actions={!this.props.user ? actionUser: [(this.state.Edit ? actions: actionsEdit)]}
                 >
                     <Dialog
                      title={"¿Quieres eliminar esta tarea?"}
                      modal={false}
                      open={this.state.openDelete}
                      actions={actionsDelete}
-                     contentStyle={{width:'450px'}}
+                     titleStyle={{padding:'24px 24px 10px', fontSize:'18px',lineHeight: '16px'}}
+                     contentStyle={{width:'254px'}}
+                     bodyStyle={{padding:'0'}}
                     />
 
                     <div>

@@ -34,6 +34,7 @@ class DetailProjectPage extends Component {
             listAddEmp:true,
             openParticipant:false,
             user:{},
+            task:{},
         };
     }
     //importate para el filtro
@@ -159,8 +160,18 @@ class DetailProjectPage extends Component {
         console.log(project)
     }
 //////////////////////////////////
-    prueba =(tarea)=>{
-        console.log('vemos si funciona')
+    prueba =(tarea,Fecha)=>{
+        let newTask= Object.assign({},this.state.task);
+        let idTask = tarea.id
+        let newDateStart = tarea.start_date;
+        let newDateExpiry = new Date(Fecha)
+         //newDateExpiry.setHours(23, 59, 59, 999)
+        newDateExpiry.setDate(newDateExpiry.getDate() - 1)
+        newTask['id']=idTask;
+        newTask['starts']=newDateStart;
+        newTask['expiry']=newDateExpiry
+        this.props.tasksActions.editTask(newTask)
+
     }
 
 
@@ -180,8 +191,8 @@ class DetailProjectPage extends Component {
             id: task.id,
             text: task.name,
             start_date: moment(task.starts, moment.ISO_8601).format('DD-MM-YYYY'),
-            duration: parseInt(moment(task.expiry).diff(task.starts,'days'))+1,
-            progress: 0
+            duration: parseInt(moment(task.expiry).diff(task.starts,'days'))+1  ,
+            color:"#63a2f1"
         }));
          let participants = project.participants.map(p =>({
             id: p.user.id,
@@ -199,7 +210,7 @@ class DetailProjectPage extends Component {
 
                         <div className="detail">
                             <NewLightBox open={this.state.openLightBox} close={this.openNewTask} id={id} participants={participants}/>
-                            <AlertProject  open={this.state.openAlertP} id={this.state.id} tareas={tasks} close={this.openAlert}/>
+                            <AlertProject  user ={user.is_staff} open={this.state.openAlertP} id={this.state.id} tareas={tasks} close={this.openAlert}/>
                             <AddParticipants
                                 open={this.state.openParticipant}
                                 employessListAdd={this.state.emploList}
@@ -234,6 +245,7 @@ class DetailProjectPage extends Component {
                                        deleteTask={this.state.deleteT}
                                        taskId={this.state.taskId}
                                        prueba={this.prueba}
+                                       user={user.is_staff}
                                 />
 
                             </div>

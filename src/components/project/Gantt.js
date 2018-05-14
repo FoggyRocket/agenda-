@@ -20,13 +20,24 @@ export default class Gantt extends Component {
         gantt.attachEvent("onBeforeLightbox", function (id) {
             return false;
         });
-        gantt.attachEvent("onAfterTaskDrag", function (id, mode, e) {
-            //any custom logic here
-            var task = gantt.getTask(id);
+        if(this.props.user){
+            gantt.attachEvent("onAfterTaskDrag", (id, mode, e)=> {
+                //any custom logic here
+                var task = gantt.getTask(id);
+                var dateEnd = gantt.calculateEndDate(task)
+                if (this.props.prueba){
 
-            console.log("lo movi", task)
-            
-        });
+                    this.props.prueba(task,dateEnd)
+                };
+
+
+            });
+        }else{
+            gantt.config.drag_move = false;
+            gantt.config.drag_resize = false;
+        }
+
+
 
         gantt.attachEvent('onTaskClick', (id) => {
             if (this.props.modalOpen) {
@@ -42,6 +53,7 @@ export default class Gantt extends Component {
             {name: "duration", label: "Duration", width: 120}
         ];
         gantt.config.drag_links = false;
+        gantt.config.drag_progress = false;
 
 
     }

@@ -11,6 +11,7 @@ import {bindActionCreators} from 'redux';
 import * as tasksActions from '../../redux/actions/tasksActions';
 import * as userAllActions from '../../redux/actions/userAllActions';
 import {Toast, ToastDanger} from 'react-toastr-basic';
+import moment from 'moment';
 
 
 
@@ -47,15 +48,19 @@ class NewLightBox extends React.Component {
     //date
     dateStart = (e,date) => {
         let task= Object.assign({},this.state.task);
-        task['starts'] = date;
+        let newDate=  new Date(date)
+        newDate.setHours(0,0,0,0)
+        task['starts'] = newDate;
         this.setState({task})
         console.log(task)
     };
     dateFinish = (e,date) => {
         let task= Object.assign({},this.state.task);
-        task['expiry'] = date;
+        let newDate=  new Date(date)
+        newDate.setHours(23, 59, 59, 999)
+        task['expiry'] = newDate ;
         this.setState({task})
-        console.log(task)
+        console.log("fecha final",task)
     };
     //Priodridad de tarea
     priorityHandle=(value)=>{
