@@ -123,7 +123,7 @@ class Events extends React.Component {
         let {newTask} = this.state;
         newTask['meeting_id']=null;
         newTask['user_id']=this.props.user.id;
-
+        newTask['project_id'] = null;
         console.log("Event: ",this.state.newTask)
         this.props.tasksActions.saveTask(newTask);
 

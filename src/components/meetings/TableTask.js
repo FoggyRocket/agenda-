@@ -64,7 +64,7 @@ export default class NewTask extends React.Component {
           <TableBody displayRowCheckbox={false} >
             {tasks.map(row =>
               <TableRow key={row.id}>
-              <TableRowColumn>{row.name}</TableRowColumn>
+              <TableRowColumn>{row.title}</TableRowColumn>
               <TableRowColumn>
                   {this.props.isStaff?<SelectField
                     underlineStyle={{display:'none'}}
@@ -84,7 +84,7 @@ export default class NewTask extends React.Component {
               </TableRowColumn>
               <TableRowColumn>
                   {this.props.isStaff?<DatePicker
-                      name='starts'
+                      name='start'
                      hintText={row.starts=== null?'Date':moment(row.starts).format('YYYY-MM-DD')}
                      underlineStyle={{display :' none '}}
                      style={{fontSize:'13px'}}
@@ -94,12 +94,12 @@ export default class NewTask extends React.Component {
                      autoOk={true}
                      disabled={this.props.isStaff ? this.state.active:this.state.disabled}
                      onClick={()=>this.props.onDate(row.id)}
-                     />:[(!row.starts ? "Sin asignar":  moment(row.starts).format('YYYY-MM-DD'))] }
+                     />:[(!row.start ? "Sin asignar":  moment(row.start).format('YYYY-MM-DD'))] }
               </TableRowColumn>
               <TableRowColumn>
                 {this.props.isStaff?<DatePicker
-                  name='expiry'
-                   hintText={row.expiry=== null?'Date': moment(row.expiry).format('YYYY-MM-DD')}
+                  name='end'
+                   hintText={row.end=== null?'Date': moment(row.end).format('YYYY-MM-DD')}
                    underlineStyle={{display :  ' none '}}
                    style={{fontSize:'13px'}}
                    hintStyle={{color:'rgba(0, 0, 0, 0.87)'}}
@@ -107,7 +107,7 @@ export default class NewTask extends React.Component {
                    autoOk={true}
                    onClick={()=>this.props.onDate(row.id)}
                     onChange={this.props.changeDateFinish}
-                   />: [(!row.expiry ? "Sin asignar":  moment(row.expiry).format('YYYY-MM-DD'))]}
+                   />: [(!row.end ? "Sin asignar":  moment(row.end).format('YYYY-MM-DD'))]}
               </TableRowColumn>
               <TableRowColumn>
                 {this.props.isStaff?<SelectField

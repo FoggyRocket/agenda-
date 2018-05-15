@@ -82,7 +82,7 @@ const TabsComponents = ({archivo,addPersonAction,onDeleteAction,onChangeAction,o
                          onSubmit={onSubmit}
                          >
                          <div className="search">
-                            <input required onChange={onChange} name="name" type="text" className="taskTerm" placeholder="Nueva tarea"/>
+                            <input required onChange={onChange} name="title" type="text" className="taskTerm" placeholder="Nueva tarea"/>
                               <RaisedButton
                                 primary={true}
                                icon={<ContentAdd />}

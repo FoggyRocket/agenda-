@@ -7,7 +7,7 @@ import Loader from '../common/Loading'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import NewLightBox from './NewLightBox';
-import AlertProject from './AlertProject';
+import EditTaskProject from './EditTaskProject'
 import AcordionProject from './AcordionProject'
 import AddParticipants from "../meetings/AddParticipants";
 import {connect} from 'react-redux';
@@ -25,7 +25,7 @@ class DetailProjectPage extends Component {
         super(props);
         this.state = {
             openLightBox:false,
-            openAlertP:false,
+            openTaskDes:false,
             editProject:false,
             id:null,
             taskId:null,
@@ -93,10 +93,10 @@ class DetailProjectPage extends Component {
         console.log(openLightBox)
     }
     openAlert =(idT)=>{
-        let {openAlertP}=this.state;
+        let {openTaskDes}=this.state;
         let {id}= this.state;
-        openAlertP = !openAlertP
-        this.setState({openAlertP, id:idT})
+        openTaskDes = !openTaskDes
+        this.setState({openTaskDes, id:idT})
     }
     //list User
     openParticipant=()=>{
@@ -140,7 +140,6 @@ class DetailProjectPage extends Component {
         let {listAddEmp} = this.state;
         listAddEmp = !listAddEmp;
         this.setState({listAddEmp})
-        console.log("FFFFF")
     };
     addParticipants=()=>{
         let project=this.props.project;
@@ -194,9 +193,9 @@ class DetailProjectPage extends Component {
         }
          mytasks = tasks.map( task => ({
             id: task.id,
-            text: task.name,
-            start_date: moment(task.starts, moment.ISO_8601).format('DD-MM-YYYY'),
-            duration: parseInt(moment(task.expiry).diff(task.starts,'days'))+1  ,
+            text: task.title,
+            start_date: moment(task.start, moment.ISO_8601).format('DD-MM-YYYY'),
+            duration: parseInt(moment(task.end).diff(task.start,'days'))+1  ,
             color:"#63a2f1"
         }));
          let participants = project.participants.map(p =>({
@@ -216,7 +215,7 @@ class DetailProjectPage extends Component {
                         <div className="detail">
                             <EditProject open={this.state.editProject} close={this.goToEdit} project={project}/>
                             <NewLightBox open={this.state.openLightBox} close={this.openNewTask} id={id} participants={participants}/>
-                            <AlertProject  user ={user.is_staff} open={this.state.openAlertP} id={this.state.id} tareas={tasks} close={this.openAlert}/>
+                            <EditTaskProject  user ={user.is_staff} open={this.state.openTaskDes} id={this.state.id} tareas={tasks} close={this.openAlert}/>
                             <AddParticipants
                                 open={this.state.openParticipant}
                                 employessListAdd={this.state.emploList}

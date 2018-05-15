@@ -11,7 +11,7 @@ import {bindActionCreators} from 'redux';
 import * as tasksActions from '../../redux/actions/tasksActions';
 import * as userAllActions from '../../redux/actions/userAllActions';
 import {Toast, ToastDanger} from 'react-toastr-basic';
-import moment from 'moment';
+
 
 
 
@@ -50,7 +50,7 @@ class NewLightBox extends React.Component {
         let task= Object.assign({},this.state.task);
         let newDate=  new Date(date)
         newDate.setHours(0,0,0,0)
-        task['starts'] = newDate;
+        task['start'] = newDate;
         this.setState({task})
         console.log(task)
     };
@@ -58,7 +58,7 @@ class NewLightBox extends React.Component {
         let task= Object.assign({},this.state.task);
         let newDate=  new Date(date)
         newDate.setHours(23, 59, 59, 999)
-        task['expiry'] = newDate ;
+        task['end'] = newDate ;
         this.setState({task})
         console.log("fecha final",task)
     };
@@ -94,7 +94,7 @@ class NewLightBox extends React.Component {
         newTask['meeting_id']=null;
         newTask['project_id']=this.props.id;
 
-        if(newTask.starts == null ){
+        if(newTask.start == null && newTask.end == null){
             ToastDanger("Por favor llena todos los campos")
         }else{
             this.props.tasksActions.saveTask(newTask)
@@ -154,7 +154,7 @@ class NewLightBox extends React.Component {
                 <div>
                     <TextField
                         floatingLabelText="Nombre de la tarea"
-                        name="name"
+                        name="title"
                         required
                         onChange={this.taskHandleChange}
                     /><br/>
@@ -185,7 +185,7 @@ class NewLightBox extends React.Component {
                         onChange={this.dateStart}
                     /><br/>
                     <DatePicker
-                        name='expiry'
+                        name='end'
                         floatingLabelText="Fecha de termino"
                         autoOk={true}
                         onChange={this.dateFinish}

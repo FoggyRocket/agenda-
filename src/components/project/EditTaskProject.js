@@ -51,13 +51,13 @@ class AlertProject extends React.Component {
     //date
     dateStart = (e,date) => {
         let task= Object.assign({},this.state.task);
-        task['starts'] = date;
+        task['start'] = date;
         this.setState({task})
         console.log(task)
     };
     dateFinish = (e,date) => {
         let task= Object.assign({},this.state.task);
-        task['expiry'] = date;
+        task['end'] = date;
         this.setState({task})
         console.log(task)
     };
@@ -197,15 +197,15 @@ class AlertProject extends React.Component {
         if(task == undefined){
             return false
         }
-        let date_start = new Date(task.starts);
-        let date_finish = new Date(task.expiry);
+        let date_start = new Date(task.start);
+        let date_finish = new Date(task.end);
 
         const Titulo = [
             <div style={{display:'flex',padding:'10px'}}>
 
                     <TextField
                         key={1}
-                        name="name"
+                        name="title"
                         defaultValue={task.name}
                         required
                         disabled={this.state.Edit}

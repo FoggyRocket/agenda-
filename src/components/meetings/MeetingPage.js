@@ -152,7 +152,7 @@ class MeetingsPage extends Component{
       newTask['project_id']=null;
       this.props.tasksActions.saveTask(newTask);
       console.log(newTask)
-      e.target.name.value="";
+      e.target.title.value="";
   };
   handleChange = (e) => {
       let task = Object.assign({}, this.state.task);
@@ -180,13 +180,13 @@ class MeetingsPage extends Component{
   };
   changeDateStart = (e,date) => {
       let dateS= Object.assign({},this.state.date);
-      dateS['starts'] = date;
+      dateS['start'] = date;
       this.props.tasksActions.editTask(dateS)
       console.log(dateS)
   };
   changeDateFinish = (e,date) => {
       let dateS= Object.assign({},this.state.date);
-      dateS['expiry'] = date;
+      dateS['end'] = date;
       this.props.tasksActions.editTask(dateS)
       console.log(dateS)
   };
