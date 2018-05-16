@@ -85,7 +85,7 @@ export default class NewTask extends React.Component {
               <TableRowColumn>
                   {this.props.isStaff?<DatePicker
                       name='start'
-                     hintText={row.starts=== null?'Date':moment(row.starts).format('YYYY-MM-DD')}
+                     hintText={row.start=== null?'Date':moment(row.start).format('YYYY-MM-DD')}
                      underlineStyle={{display :' none '}}
                      style={{fontSize:'13px'}}
                      hintStyle={{color:'rgba(0, 0, 0, 0.87)'}}
