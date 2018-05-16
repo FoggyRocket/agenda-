@@ -22,22 +22,36 @@ const style = {
 class Calendar extends React.Component {
 
 
-
+prueba = ()=>{
+    console.log("Hola si funciono")
+}
     updateTasks=(tasks)=>{
         //let listTasks = this.props.myTasks;
         $('#calendar').fullCalendar('destroy');
         console.log("No se que hace",tasks)
         $('#calendar').fullCalendar({
             header: {
+                center: 'agendaWeek, month, agendaDay',
                 right:'prev, next',
             },
-            eventClick: function(calEvent, jsEvent, view) {
+            eventClick:(calEvent, jsEvent, view)=> {
 
                 var moment = $('#calendar').fullCalendar('getDate');
                 alert("The current date of the calendar is " + moment.format());
-
                 console.log("DYLAN", calEvent)
                 },
+            eventDrop:(event, delta, revertFunc)=> {
+                var dateStart= new Date(event.start)
+                console.log("Arrastro", dateStart)
+                this.prueba()
+                alert(event.title + " was dropped on " + event.start.format());
+            },
+            eventResize:(event, jsEvent, ui, view)=>{
+                var dateEnd= new Date(event.end)
+                alert(event.title +"fue arrastrado en "+ event.end);
+                console.log("Arrastro 2",dateEnd)
+
+            },
             displayEventTime: false,
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar

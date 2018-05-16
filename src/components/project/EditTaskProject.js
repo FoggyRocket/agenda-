@@ -206,7 +206,7 @@ class AlertProject extends React.Component {
                     <TextField
                         key={1}
                         name="title"
-                        defaultValue={task.name}
+                        defaultValue={task.title}
                         required
                         disabled={this.state.Edit}
                         inputStyle={{textAlign:'center'}}

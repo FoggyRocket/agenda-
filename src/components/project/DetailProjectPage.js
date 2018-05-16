@@ -164,16 +164,17 @@ class DetailProjectPage extends Component {
         console.log(project)
     }
 //////////////////////////////////
-    dragDate =(tarea,Fecha)=>{
+    dragInDate =(tarea,Fecha)=>{
         let newTask= Object.assign({},this.state.task);
         let idTask = tarea.id
         let newDateStart = tarea.start_date;
         let newDateExpiry = new Date(Fecha)
-         //newDateExpiry.setHours(23, 59, 59, 999)
+        newDateExpiry.setHours(23, 59, 59, 999)
         newDateExpiry.setDate(newDateExpiry.getDate() - 1)
         newTask['id']=idTask;
-        newTask['starts']=newDateStart;
-        newTask['expiry']=newDateExpiry
+        newTask['start']=newDateStart;
+        newTask['end']=newDateExpiry;
+        console.log("Aqui vemos", newTask)
         this.props.tasksActions.editTask(newTask)
 
     }
@@ -251,7 +252,7 @@ class DetailProjectPage extends Component {
                                        modalOpen={this.openAlert}
                                        deleteTask={this.state.deleteT}
                                        taskId={this.state.taskId}
-                                       dragDate={this.dragDate}
+                                       dragInDate={this.dragInDate}
                                        user={user.is_staff}
                                 />
 

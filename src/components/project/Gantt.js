@@ -25,9 +25,8 @@ export default class Gantt extends Component {
                 //any custom logic here
                 var task = gantt.getTask(id);
                 var dateEnd = gantt.calculateEndDate(task)
-                if (this.props.dragDate){
-
-                    this.props.dragDate(task,dateEnd)
+                if (this.props.dragInDate){
+                    this.props.dragInDate(task,dateEnd)
                 };
 
 
