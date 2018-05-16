@@ -21,14 +21,23 @@ const style = {
 
 class Calendar extends React.Component {
 
+
+
     updateTasks=(tasks)=>{
         //let listTasks = this.props.myTasks;
         $('#calendar').fullCalendar('destroy');
-        console.log(tasks)
+        console.log("No se que hace",tasks)
         $('#calendar').fullCalendar({
             header: {
                 right:'prev, next',
             },
+            eventClick: function(calEvent, jsEvent, view) {
+
+                var moment = $('#calendar').fullCalendar('getDate');
+                alert("The current date of the calendar is " + moment.format());
+
+                console.log("DYLAN", calEvent)
+                },
             displayEventTime: false,
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar
@@ -39,10 +48,10 @@ class Calendar extends React.Component {
                     $(this).remove();
                 }
             },
+
             events: tasks
-
-
         })
+
 
     };
 

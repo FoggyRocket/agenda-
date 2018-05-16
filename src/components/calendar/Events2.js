@@ -203,9 +203,7 @@ class Events extends React.Component {
                     onDatePickerChange={this.handleDatePickerChange}
                     onSubmit={this.handleSubmit}
                     handleDatePickerEnd={this.handleDatePickerEnd}
-
                     menu={this.state.menu}
-
                     priorityHandle={this.priorityHandle}
                     phandleChange={this.phandleChange}
                     priority = {this.state.priority}
