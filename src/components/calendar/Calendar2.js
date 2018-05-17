@@ -14,18 +14,45 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Loader from '../common/Loading';
 import moment from 'moment';
+import EditTask from "./EditTask";
+
 
 const style = {
     color: "white"
 };
 
 class Calendar extends React.Component {
-
-
-prueba = ()=>{
-    console.log("Hola si funciono")
+state = {
+    open:false,
+    tareitas:{},
 }
+
+    prueba = ()=>{
+
+        let tareitas = this.props.myTasks.map( task => ({
+            id: task.id,
+            title: task.title,
+            start: task.start,
+            end:new Date((new Date(task.end)).setDate((new Date(task.end)).getDate() +1)),
+            text:task.text,
+        }));
+        this.setState({tareitas})
+    }
+    handleOpen = () => {
+        let {open} = this.state;
+        open = !open
+        this.setState({open});
+    };
     updateTasks=(tasks)=>{
+
+        let tareitas = tasks.map( task => ({
+            id: task.id,
+            title: task.title,
+            start: task.start,
+            end:new Date((new Date(task.end)).setDate((new Date(task.end)).getDate() +1)),
+            text:task.text,
+        }));
+
         //let listTasks = this.props.myTasks;
         $('#calendar').fullCalendar('destroy');
         console.log("No se que hace",tasks)
@@ -35,21 +62,25 @@ prueba = ()=>{
                 right:'prev, next',
             },
             eventClick:(calEvent, jsEvent, view)=> {
-
-                var moment = $('#calendar').fullCalendar('getDate');
-                alert("The current date of the calendar is " + moment.format());
-                console.log("DYLAN", calEvent)
+                this.handleOpen();
+                console.log("Evento", calEvent)
                 },
             eventDrop:(event, delta, revertFunc)=> {
                 var dateStart= new Date(event.start)
                 console.log("Arrastro", dateStart)
-                this.prueba()
+
                 alert(event.title + " was dropped on " + event.start.format());
             },
             eventResize:(event, jsEvent, ui, view)=>{
                 var dateEnd= new Date(event.end)
                 alert(event.title +"fue arrastrado en "+ event.end);
                 console.log("Arrastro 2",dateEnd)
+
+            },
+            dayClick:(date, jsEvent, view, resourceObj)=> {
+                this.handleOpen();
+                alert('Date: ' + date.format());
+
 
             },
             displayEventTime: false,
@@ -63,7 +94,7 @@ prueba = ()=>{
                 }
             },
 
-            events: tasks
+            events: tareitas
         })
 
 
@@ -75,6 +106,7 @@ prueba = ()=>{
         this.updateTasks(this.props.myTasks)
     }
     componentDidUpdate(){
+
         this.updateTasks(this.props.myTasks)
     }
 
@@ -82,13 +114,13 @@ prueba = ()=>{
         let {myTasks, fetched} = this.props;
 
         if(!fetched)return<Loader/>
-        console.log("Mis tareas Calendar:", myTasks)
 
 
         return (
             <div className={'cal-container'}>
-                <div id="calendar"></div>
 
+                <div id="calendar"></div>
+                <EditTask open={this.state.open} close={this.handleOpen}/>
             </div>
 
         );
