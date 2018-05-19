@@ -5,6 +5,7 @@ import * as tasksActions from '../../redux/actions/tasksActions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Loader from '../common/Loading';
+import TextField from 'material-ui/TextField';
 
 
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
@@ -24,11 +25,12 @@ class Events extends React.Component {
 
     state = {
         open: false,
-        newTask:[],
-        menu:[{
+        newTask:{},
+        menu:[
+            {
             id:1,
             value:"Q3"
-        },
+            },
             {
                 id:2,
                 value:"Q2"
@@ -124,11 +126,22 @@ class Events extends React.Component {
         newTask['meeting_id']=null;
         newTask['user_id']=this.props.user.id;
         newTask['project_id'] = null;
+        newTask['allDay'] =true;
+        newTask['start']=new Date();
         console.log("Event: ",this.state.newTask)
         this.props.tasksActions.saveTask(newTask);
+        console.log("Nueva tarea", newTask)
+        e.target.title.value="";
 
     };
+    prueba=(e)=>{
+            e.preventDefault();
+            console.log("input",e)
+            // write your functionality here
 
+
+
+    }
 
     priorityHandle = value =>{
         let newTask = this.state.newTask;
@@ -169,14 +182,24 @@ class Events extends React.Component {
         return <div id='external-events'>
             <h4 style={{color: "#778BA7"}}>TAREAS</h4>
 
-
-            <RaisedButton
-                label="Agregar Tarea"
-                onClick={this.handleOpen}
-                icon={<NoteAdd/>}
-
-            />
-
+            <form onSubmit={this.handleSubmit} style={{display:'flex', justifyContent:"center",alignItems:"center",borderRadius: "5px",
+                backgroundColor:"white"}}>
+                <NoteAdd
+                style={{marginRight: "10px"}}/>
+                <TextField
+                    name="title"
+                    hintText="Agregar una tarea nueva"
+                    underlineStyle={{display :  ' none '}}
+                    onChange={this.handleChange}
+                />
+            </form>
+            <div style={{display:"flex", flexDirection:"column", alignItems:"center", margin:"10px 0px 10px"}}>
+                <span style={{color: "#778BA7"}}>Hoy</span>
+                <div style={{margin:"3px 0 3px 0"}}>
+                    <span className="datos">0 Tareas</span>
+                    <span className="datos">0 Meetings</span>
+                </div>
+            </div>
 
 
             <List>

@@ -33,6 +33,7 @@ state = {
             id: task.id,
             title: task.title,
             start: task.start,
+            allDay:task.allDay,
             end:new Date((new Date(task.end)).setDate((new Date(task.end)).getDate() +1)),
             text:task.text,
         }));
@@ -49,13 +50,14 @@ state = {
             id: task.id,
             title: task.title,
             start: task.start,
+            allDay:task.allDay,
             end:new Date((new Date(task.end)).setDate((new Date(task.end)).getDate() +1)),
             text:task.text,
         }));
 
         //let listTasks = this.props.myTasks;
         $('#calendar').fullCalendar('destroy');
-        console.log("No se que hace",tasks)
+        console.log("No se que hace",tareitas)
         $('#calendar').fullCalendar({
             header: {
                 center: 'agendaWeek, month, agendaDay',
@@ -67,7 +69,8 @@ state = {
                 },
             eventDrop:(event, delta, revertFunc)=> {
                 var dateStart= new Date(event.start)
-                console.log("Arrastro", dateStart)
+                var dateEnd = new Date(event.end)
+                console.log("Arrastro")
 
                 alert(event.title + " was dropped on " + event.start.format());
             },
@@ -82,6 +85,9 @@ state = {
                 alert('Date: ' + date.format());
 
 
+            },
+            viewRender:function(view) {
+              console.log("Hola papa",view)
             },
             displayEventTime: false,
             editable: true,
@@ -114,7 +120,7 @@ state = {
         let {myTasks, fetched} = this.props;
 
         if(!fetched)return<Loader/>
-
+        console.log("myTasks",myTasks)
 
         return (
             <div className={'cal-container'}>
