@@ -1,9 +1,6 @@
 import React from 'react';
 import './Dashboard.css';
-import {Card, CardTitle} from 'material-ui/Card';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import Done from 'material-ui/svg-icons/content/add';
 import Calendar from '../calendar/Calendar2';
 import moment from 'moment'
 import '../../../node_modules/moment/locale/es'
@@ -58,6 +55,7 @@ export const DashboardDisplay = ({date,open,fastnote,viewNote})=>{
 
                         <h4>Proyectos</h4>
                     </div>
+                    Aqui va la tabla
                 </div>
                 <div className="tareas"  style={{margin:"30px 0 0 10px"}}>
                     <div style={{display:"flex", alignItems:"center", borderBottom: "1px solid #eee", height:"30px"}}>

@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as fastNoteActions  from '../../redux/actions/fastNoteActions';
 import * as userActions  from '../../redux/actions/userActions';
+import * as projectActions from "../../redux/actions/projectActions";
 import Loader from '../common/Loading';
 
 
@@ -34,8 +35,9 @@ class DashContainer extends Component{
 
     render(){
        let d = new Date()
-       let {fastnote,fetched,myTask} = this.props;
+       let {fastnote,fetched,myTask,projects} = this.props;
        if(!fetched)return<Loader/>
+        console.log("mis project", projects)
         return(
           <div>
             <NewFastNote close={this.openNote} open={this.state.openNewFastNote} />
@@ -50,19 +52,22 @@ class DashContainer extends Component{
 function mapStateToProps(state, ownProps) {
   let userAll=state.userAll.list
   let user=state.user.object
+  let projects=state.projects.myProjects;
   let fastnote = state.fastnote.list.filter(f=>{
     return  user.id== f.user.id
   })
      return {
         fastnote,
+        projects,
         myTask: state.tasks.myTasks,
-        fetched:  fastnote!==undefined
+        fetched:  fastnote!==undefined && projects!==undefined,
 
      }
 
 }
 function mapDispatchToProps(dispatch) {
     return{
+        projectActions:bindActionCreators(projectActions,dispatch),
         fastNoteActions:bindActionCreators(fastNoteActions,dispatch),
         user:bindActionCreators(userActions,dispatch),
     }
