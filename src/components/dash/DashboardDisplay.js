@@ -6,8 +6,10 @@ import moment from 'moment'
 import '../../../node_modules/moment/locale/es'
 import Edit from 'material-ui/svg-icons/content/create';
 import {List, ListItem} from 'material-ui/List';
+import {ProjectTable, TableProject} from "./TableProject";
 
-export const DashboardDisplay = ({date,open,fastnote,viewNote})=>{
+
+export const DashboardDisplay = ({date,open,fastnote,viewNote,projects})=>{
     return(
         <div className="dash">
             <h2>Resumen</h2>
@@ -55,7 +57,7 @@ export const DashboardDisplay = ({date,open,fastnote,viewNote})=>{
 
                         <h4>Proyectos</h4>
                     </div>
-                    Aqui va la tabla
+                    <TableProject projects={projects} />
                 </div>
                 <div className="tareas"  style={{margin:"30px 0 0 10px"}}>
                     <div style={{display:"flex", alignItems:"center", borderBottom: "1px solid #eee", height:"30px"}}>

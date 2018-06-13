@@ -8,12 +8,10 @@ import {
     TableRow,
     TableRowColumn
 } from 'material-ui';
-import {RowBody} from './RowBody';
+import {RowBody} from "../project/RowBody";
 
-export const ProjectTable = ({projects = [], selectedRows}) => (
-    <div className="box_cardTable">
-        <Card className="cardConteidoTable">
-            <CardTitle title="Proyectos"/>
+export const TableProject = ({projects = [], selectedRows}) => (
+
             <Table
                 fixedHeader
                 multiSelectable
@@ -48,6 +46,4 @@ export const ProjectTable = ({projects = [], selectedRows}) => (
                     }
                 </TableBody>
             </Table>
-        </Card>
-    </div>
 );

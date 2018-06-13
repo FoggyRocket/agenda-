@@ -42,7 +42,7 @@ class DashContainer extends Component{
           <div>
             <NewFastNote close={this.openNote} open={this.state.openNewFastNote} />
             <ViewFastNote close={this.viewNote} open={this.state.openViewFastNote} data={this.state.data}/>
-            <DashboardDisplay date={d} open={this.openNote} fastnote={fastnote} viewNote={this.viewNote}/>
+            <DashboardDisplay date={d} open={this.openNote} fastnote={fastnote} viewNote={this.viewNote} projects={projects}/>
           </div>
 
         );
