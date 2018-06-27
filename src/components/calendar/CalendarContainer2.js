@@ -1,6 +1,6 @@
 import React from 'react';
 import Events from './Events2'
-import Calendar from './Calendar2';
+import Calendar from './Calendar';
 import './Calendar.css';
 
 
