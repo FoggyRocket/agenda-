@@ -1,6 +1,7 @@
 import React from 'react';
 import Events from './Events2'
-import Calendar from './Calendar2';
+import Calendar from './Calendar';
+import AgendaView from './AgendaView'
 import './Calendar.css';
 
 
@@ -12,6 +13,7 @@ class CalendarContainer extends React.Component {
             <div className={'conenedor-cal-task'}>
                 <Events/>
                 <Calendar/>
+
             </div>
         );
     }

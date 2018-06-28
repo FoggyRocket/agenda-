@@ -6,13 +6,13 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Loader from '../common/Loading';
 import TextField from 'material-ui/TextField';
-
-
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
+import IconCalendar from 'material-ui/svg-icons/action/event';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import AddTask from "./AddTask";
+import {Link} from 'react-router-dom';
 
 
 const styledIconButton = {
@@ -200,7 +200,27 @@ class Events extends React.Component {
                     <span className="datos">0 Meetings</span>
                 </div>
             </div>
+            <div>
+                <Link to="/agenda/tasks/Agenda">
+                    <RaisedButton
+                        icon={<IconCalendar />}
+                        label={"Agenda"}
+                    />
+                </Link>
+                <Link to="/agenda/tasks/Week">
+                    <RaisedButton
+                        icon={<IconCalendar />}
+                        label={"Semana"}
+                    />
+                </Link>
+                <Link to="/agenda/tasks">
+                    <RaisedButton
+                        icon={<IconCalendar />}
+                        label={"Mes"}
+                    />
+                </Link>
 
+            </div>
 
             <List>
                 {myTasks.map((tasks, index)=>{

@@ -14,6 +14,7 @@ const Routes = () => (
         <Route path="/agenda" component={PrincipalContainer}/>
         <Redirect from="/" exact to="/agenda/" />
 
+
     </Switch>
 
 );

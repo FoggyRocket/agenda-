@@ -1,7 +1,7 @@
 import React from 'react';
 import './Dashboard.css';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import Calendar from '../calendar/Calendar2';
+import MonthView from '../calendar/MonthView';
 import moment from 'moment'
 import '../../../node_modules/moment/locale/es'
 import Edit from 'material-ui/svg-icons/content/create';
@@ -48,7 +48,7 @@ export const DashboardDisplay = ({date,open,fastnote,viewNote,projects})=>{
                     </div>
                 </div>
                 <div className="calendar">
-                    <Calendar/>
+                    <MonthView/>
                 </div>
             </div>
             <div className="flex">

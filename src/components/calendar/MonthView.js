@@ -22,10 +22,10 @@ const style = {
 };
 
 class Calendar extends React.Component {
-state = {
-    open:false,
-    tareitas:{},
-}
+    state = {
+        open:false,
+        tareitas:{},
+    }
 
     prueba = ()=>{
 
@@ -58,15 +58,15 @@ state = {
         //let listTasks = this.props.myTasks;
         $('#calendar').fullCalendar('destroy');
         console.log("No se que hace",tareitas)
+
         $('#calendar').fullCalendar({
             header: {
-                center: 'agendaWeek, month, agendaDay',
                 right:'prev, next',
             },
             eventClick:(calEvent, jsEvent, view)=> {
                 this.handleOpen();
                 console.log("Evento", calEvent)
-                },
+            },
             eventDrop:(event, delta, revertFunc)=> {
                 var dateStart= new Date(event.start)
                 var dateEnd = new Date(event.end)
@@ -87,7 +87,7 @@ state = {
 
             },
             viewRender:function(view) {
-              console.log("Hola papa",view)
+                console.log("Hola papa",view)
             },
             displayEventTime: false,
             editable: true,
@@ -99,6 +99,7 @@ state = {
                     $(this).remove();
                 }
             },
+
 
             events: tareitas
         })
